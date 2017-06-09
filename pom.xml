@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.centit.support</groupId>
+	<artifactId>centit-scaffold</artifactId>
+	<version>2.1.1-SNAPSHOT</version>
+	<name>centit-scaffold</name>
+	<description>代码脚手架，spring struts dao 配置文件脚手架</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<!-- mvn deploy -DpomFile=pom.xml -->
+	<distributionManagement>
+		<repository>
+			<id>centit-releases</id>
+			<name>centit-release</name>
+			<url>http://fileserver.centit.com:8080/nexus/content/repositories/centit-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>centit-snapshots</id>
+			<name>centit-snapshots</name>
+			<url>http://fileserver.centit.com:8080/nexus/content/repositories/centit-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ibm.db2</groupId>
+			<artifactId>db2jcc</artifactId>
+			<scope>runtime</scope>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<scope>runtime</scope>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.oracle</groupId>
+		  <artifactId>ojdbc6</artifactId>
+		  <version>11.2.0.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.centit.support</groupId>
+			<artifactId>centit-database</artifactId>
+			<version>2.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.dom4j</groupId>
+		  <artifactId>dom4j</artifactId>
+		  <version>2.0.0-RC1</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency> -->
+
+	</dependencies>
+</project>

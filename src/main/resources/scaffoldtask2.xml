@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE scaffold [
+	<!ELEMENT scaffold (project|dbconfig|tasklist)*>	
+	<!ELEMENT project (property+)>	
+	<!ELEMENT dbconfig (property+)>
+	<!ATTLIST dbconfig type (ref|immediate) "immediate">	
+	<!ELEMENT tasklist (task+)>
+	<!ELEMENT task (property+)>
+	<!ATTLIST task name (runHibernateReverse|runPdmHibernateReverse|runCreateSourceHandler|runCreateSourceMvcHandler|runMetadataHandler|runVerificationHandler) "runHibernateReverse">
+	<!ATTLIST task run (yes|no) "yes">
+
+	<!ELEMENT property EMPTY>	
+	<!ATTLIST property name CDATA  "">
+	<!ATTLIST property value CDATA  "">
+]>
+
+<scaffold>
+	<project>
+		<property
+			value="D:/Projects/framework2.1/framework-parent/framework-sys-module"
+			name="projdir" />
+		<property value="sys" name="appname" />
+		<property value="src/main/java" name="srcdir" />
+		<property value="src/main/webapp" name="jspdir" />
+		<property value="src/main/resources/sampleflowconfig" name="configdir" />
+		<property value="com/centit/sys" name="apppackagepath" />
+	</project>
+	<tasklist>
+		<task name="runCreateSourceMvcHandler" run="yes">
+			<!-- 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt, 
+			isDwz[是否Dwz页面] -->
+			<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
+			<property value="1,1,0,1,1,1,0,1,1,0,1" name="instruction" />
+			<property
+				value="D:/Projects/framework2.1/framework-parent/framework-sys-module/Document/BS框架系统表结构2.1.pdm"
+				name="pdmfile" />
+			<property value="" name="dbschema" />
+			<property value="F_QUERY_FILTER_CONDITION" name="tables" />
+			<!-- java template dir 必须指定觉得路劲 -->
+			<property value="D:/Projects/framework2.1/centit-scaffold/src/main/resources/springmvc/java" name="javatemplate" />
+			<property value="D:/Projects/framework2.1/centit-scaffold/src/main/resources/springmvc/page" name="jsptemplate" />
+			<property value="true" name="force" />
+		</task>
+	</tasklist>
+</scaffold>

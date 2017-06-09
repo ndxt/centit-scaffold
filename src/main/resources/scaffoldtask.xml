@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scaffold [
+	<!ELEMENT scaffold (project,dbconfig,tasklist)>
+	
+	<!ELEMENT project (property+)>
+	
+	<!ELEMENT dbconfig (property+)>
+	<!ATTLIST dbconfig type (ref|immediate) "immediate">
+	
+	<!ELEMENT tasklist (task+)>
+	<!ELEMENT task (property+)>
+	<!ATTLIST task name (runHibernateReverse|runPdmHibernateReverse|runCreateSourceHandler|runCreateSourceMvcHandler|runMetadataHandler|runVerificationHandler) "runHibernateReverse">
+	<!ATTLIST task run (yes|no) "yes">
+
+	<!ELEMENT property EMPTY>	
+	<!ATTLIST property name CDATA  "">
+	<!ATTLIST property value CDATA  "">
+]>
+<scaffold>
+	<project>
+		<property name="projdir" value="D:/Projects/j2eews/njld-pt" />
+		<property name="appname" value="zxwh" />
+		<property name="srcdir" value="src/main/java" />
+		<property name="jspdir" value="src/main/webapp" />
+		<property name="configdir" value="src/main/resources/sampleflowconfig" />
+		<property name="apppackagepath" value="com/centit/njld/zxwh" />
+	</project>
+	<!-- type=ref|immediate -->
+	<dbconfig type="immediate">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.128.13:1521:centora" />
+		<property name="username" value="fdemo" />
+		<property name="password" value="fdemo" />
+
+		<property name="configfile" value="D:/centit/framework/framework-workflow-module2.0/src/main/webapp/WEB-INF/spring-hibernate.xml" />
+		<property name="beanname" value="dataSource" />
+	</dbconfig>
+	<tasklist>
+		<task name="runHibernateReverse" run="no">
+			<property name="tables" value="WR_ADDV_B" />
+		</task>
+		<task name="runPdmHibernateReverse" run="no">
+			<property name="pdmfile" value="D:/Projects/framework/framework-workflow-module2.0/Document/工作流数据结构表2.0.pdm" />
+			<property name="dbschema" value="" />
+			<property name="tables" value="WF_RUNTIME_WARNING" />
+			<property name="createhbmfile" value="yes" />
+			<property name="createresource" value="yes" />
+		</task>
+		<task name="runCreateSourceHandler" run="no">
+			<!-- 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt, isDwz[是否Dwz页面] -->
+			<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
+			<property name="instruction" value="1,1,0,1,1,0,0,1,1,0,1" /> 
+			<!-- 要转换的 hbm.xml 的文件名，或者为 all 则生成 业务类包的根包.po下面的所有的 *.hbm.xml -->
+			<property name="hbmfile" value="wfRuntimeWarning.hbm.xml" />
+			<!-- java template dir 如果不是绝对路径程序会在当前的centit_scaffold.jar包中寻找数据 -->
+			<property name="javatemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/struts2template/javaInDiv" />
+			<property name="jsptemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/struts2template/jspInDiv" />
+		</task>
+		
+		<task name="runCreateSourceMvcHandler" run="yes">
+			<!-- 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt, isDwz[是否Dwz页面] -->
+			<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
+			<property name="instruction" value="1,1,0,1,1,0,0,1,1,0,1" /> 
+			
+			<property name="pdmfile" value="D:/temp/njld_yw.pdm" />
+			<property name="dbschema" value="" />
+			<property name="tables" value="T_YW_PROJECT,T_YW_PROJECT_POWER,T_YW_PROJECT_MATERIAL,T_YW_PROJECT_BUDGET,T_YW_PROJECT_CONTRACT,T_YW_PROJECT_PROCEEDS" />		
+			<!-- java template dir 必须指定觉得路劲 -->
+			<property name="javatemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc/java" />
+			<property name="jsptemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc/page" />
+			<property name="force" value="true" />
+		</task>
+		
+		<task name="runMetadataHandler" run="no">
+			<property name="pdmfile" value="D:/centit/j2ee/centit-oa/Document/BS开发框架.pdm" />
+			<!-- 表名 用[,]分开，比如：Career,Education,Employee 注意pdm中的表面大小写是敏感的 ALL 代表全部 -->
+			<property name="tables" value="all" />
+		</task>
+
+		<task name="runVerificationHandler" run="no">
+			<!-- 文件输出目录 -->
+			<property name="output" value="d:/output" />
+		</task>
+	</tasklist>
+</scaffold>
