@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Created-By: Fat Jar Eclipse Plug-In
-Main-Class: com.centit.support.scaffold.RunScaffoldTask
+Main-Class: com.centit.support.scaffold.RunScaffoldTask2
 

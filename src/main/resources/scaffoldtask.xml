@@ -18,12 +18,12 @@
 ]>
 <scaffold>
 	<project>
-		<property name="projdir" value="D:/Projects/j2eews/njld-pt" />
+		<property name="projdir" value="D:/Projects/currwork/centit-im" />
 		<property name="appname" value="zxwh" />
 		<property name="srcdir" value="src/main/java" />
 		<property name="jspdir" value="src/main/webapp" />
-		<property name="configdir" value="src/main/resources/sampleflowconfig" />
-		<property name="apppackagepath" value="com/centit/njld/zxwh" />
+		<property name="configdir" value="src/main/resources/config" />
+		<property name="apppackagepath" value="com/centit/im" />
 	</project>
 	<!-- type=ref|immediate -->
 	<dbconfig type="immediate">
@@ -62,12 +62,12 @@
 			<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
 			<property name="instruction" value="1,1,0,1,1,0,0,1,1,0,1" /> 
 			
-			<property name="pdmfile" value="D:/temp/njld_yw.pdm" />
+			<property name="pdmfile" value="D:/Projects/centit-product/centitIm/即时通讯模块.pdm" />
 			<property name="dbschema" value="" />
-			<property name="tables" value="T_YW_PROJECT,T_YW_PROJECT_POWER,T_YW_PROJECT_MATERIAL,T_YW_PROJECT_BUDGET,T_YW_PROJECT_CONTRACT,T_YW_PROJECT_PROCEEDS" />		
+			<property name="tables" value="F_WEB_IM_MESSAGE" />
 			<!-- java template dir 必须指定觉得路劲 -->
-			<property name="javatemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc/java" />
-			<property name="jsptemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc/page" />
+			<property name="javatemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc-mybatis/java" />
+			<property name="jsptemplate" value="D:/Projects/j2eews/centit-scaffold/src/main/resources/springmvc-mybatis/page" />
 			<property name="force" value="true" />
 		</task>
 		

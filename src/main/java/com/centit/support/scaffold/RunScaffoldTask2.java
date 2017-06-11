@@ -11,6 +11,7 @@ public class RunScaffoldTask2 {
 		MvcHandler.runTask(task);		
 		//VerificationHibernateDataType.runTask(task);
 	}
+	
 	/**
 	 * @param args 任务配置文件
 	 */

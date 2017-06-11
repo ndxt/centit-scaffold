@@ -9,7 +9,13 @@ public class RunScaffoldTaskTest {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws SQLException {
-		RunScaffoldTask.runTask("D:\\Projects\\j2eews\\centit-scaffold\\src\\main\\resources\\scaffoldtask.xml");
+		if( args.length < 1 ){
+			RunScaffoldTask2.runTask("D:\\Projects\\framework\\centit-scaffold\\src\\main\\resources\\scaffoldtask2.xml");
+			System.out.println("缺少参数:任务配置文件!");
+			return;
+		}
+		RunScaffoldTask2.runTask(args[0]);
+		System.out.println("Done!");
 	}
 
 }

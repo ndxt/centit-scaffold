@@ -27,7 +27,7 @@
     <sql id="queryFilter">
         &{for-each:keyproperty}
         <if test="&{keyproperty} != null">
-            AND keypropertyColumn = #{&{keyproperty}}
+            AND &{keypropertyColumn} = #{&{keyproperty}}
         </if>
         &{end-for-each}&{for-each:property}
         <if test="&{property} != null">
@@ -39,7 +39,7 @@
     <sql id="primaryKeyFilter">
         &{for-each:keyproperty}
         <if test="&{keyproperty} != null">
-            AND keypropertyColumn = #{&{keyproperty}}
+            AND &{keypropertyColumn} = #{&{keyproperty}}
         </if>
         &{end-for-each}
     </sql>

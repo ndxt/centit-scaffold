@@ -26,7 +26,7 @@ import java.util.Set;
   &{tabledesc + tableComment}   
 */
 @Entity
-@Table(name = "&{tablename}")
+//@Table(name = "&{tablename}")
 public class &{simpleclassname} implements java.io.Serializable {
 	private static final long serialVersionUID =  1L;
 
@@ -34,19 +34,19 @@ public class &{simpleclassname} implements java.io.Serializable {
 	/**
 	 * &{keypropertydesc} &{keypropertyComment} 
 	 */
-	@Column(name = "&{keypropertyColumn}")
+	//@Column(name = "&{keypropertyColumn}")
 	@NotBlank(message = "字段不能为空")
 	private &{keypropertytype} &{keyproperty};
 &{end-for-each}&{for-each:property}
 	/**
 	 * &{propertydesc} &{propertyComment} 
 	 */
-	@Column(name = "&{propertyColumn}")&{if:propertynotnull}
+	//@Column(name = "&{propertyColumn}")&{if:propertynotnull}
 	@NotBlank(message = "字段不能为空")&{end-if}&{if:propertytype="String"}
 	@Length(min = 0, max = &{propertylength}, message = "字段长度不能小于{min}大于{max}")&{end-if}
 	private &{propertytype}  &{property};&{end-for-each}
 &{for-each:onetomany}	
-	@OneToMany(mappedBy = "&{entityname}", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@OneToMany(mappedBy = "&{entityname}", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<&{subclassname}> &{subentitylistname};
 &{end-for-each}
 	// Constructors
