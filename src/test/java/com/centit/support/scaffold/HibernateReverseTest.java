@@ -13,7 +13,7 @@ import com.centit.support.database.metadata.SimpleTableInfo;
 
 public class HibernateReverseTest {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws SQLException 
 	{
 		//DBConn.loadHibernateConfig("E:/Study/Centit/BSDFW/web/WEB-INF/hibernate.cfg.xml");
 		String sJavaSourceDir = "D:/centit/j2ee/centit-scaffold/src/test/java";

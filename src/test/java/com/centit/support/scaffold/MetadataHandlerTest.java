@@ -1,5 +1,7 @@
 package com.centit.support.scaffold;
 
+import java.sql.SQLException;
+
 import com.centit.support.database.DataSourceDescription;
 import com.centit.support.database.DbcpConnect;
 import com.centit.support.database.DbcpConnectPools;
@@ -8,7 +10,7 @@ import com.centit.support.database.metadata.SimpleTableInfo;
 
 public class MetadataHandlerTest {
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws SQLException 
 	{
 		String sHibernateConfigFile = "E:/Centit/J2EE/BSDFW/web/WEB-INF/hibernate.cfg.xml";
 		String sDbBeanName = "dataSource";
