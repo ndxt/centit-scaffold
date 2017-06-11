@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="&{classname}Mapper">
+
+    <resultMap type="&{classname}"
+               id="&{idname}">
+        &{for-each:keyproperty}
+        <result property="&{keyproperty}" column="&{keypropertyColumn}"/>
+        &{end-for-each}&{for-each:property}
+        <result property="&{property}" column="&{propertyColumn}"/>
+        &{end-for-each}
+    </resultMap>
+
+    <sql id="columnList">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty} != null">
+            &{keypropertyColumn},
+        </if>
+        &{end-for-each}&{for-each:property}
+        <if test="&{property} != null">
+            &{propertyColumn},
+        </if>
+        &{end-for-each}
+    </sql>
+
+    <sql id="queryFilter">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty} != null">
+            AND keypropertyColumn = #{&{keyproperty}}
+        </if>
+        &{end-for-each}&{for-each:property}
+        <if test="&{property} != null">
+            AND &{propertyColumn} = #{&{property}}
+        </if>
+        &{end-for-each}
+    </sql>
+
+    <sql id="primaryKeyFilter">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty} != null">
+            AND keypropertyColumn = #{&{keyproperty}}
+        </if>
+        &{end-for-each}
+    </sql>
+
+    <sql id="insertColumn">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty}!= null ">&{keypropertyColumn},</if>
+        &{end-for-each}&{for-each:property}
+        <if test="&{property}!= null ">&{propertyColumn},</if>
+        &{end-for-each}
+    </sql>
+
+    <sql id="insertColumnValue">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty}!= null ">#{&{keyproperty}},</if>
+        &{end-for-each}&{for-each:property}
+        <if test="&{property}!= null ">#{&{property}},</if>
+        &{end-for-each}
+    </sql>
+
+    <sql id="updateColumnList">
+        &{for-each:keyproperty}
+        <if test="&{keyproperty} != null">
+            &{keypropertyColumn} = #{&{keyproperty}},
+        </if>
+        &{end-for-each}&{for-each:property}
+        <if test="&{property} != null">
+            &{propertyColumn} = #{&{property}},
+        </if>
+        &{end-for-each}
+    </sql>
+
+    <!-- 新增对象-->
+    <insert id="insertNew&{simpleclassname}" parameterType="&{classname}">
+        INSERT INTO &{tablename}
+        <trim prefix=" (" suffix=") " suffixOverrides=", ">
+            <include refid="insertColumn" />
+        </trim>
+        VALUES
+        <trim prefix=" (" suffix=") " suffixOverrides=", ">
+            <include refid="insertColumnValue" />
+        </trim>
+    </insert>
+
+    <!-- 根据主键删除-->
+    <delete id="delete&{simpleclassname}ById" parameterType="hashmap">
+        DELETE FROM &{tablename}
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <include refid="primaryKeyFilter" />
+        </trim>
+    </delete>
+    <!-- 根据主键修改对象信息 -->
+    <update id="update&{simpleclassname}" parameterType="&{classname}">
+        UPDATE &{tablename} SET
+        <trim suffixOverrides=",">
+            <include refid="updateColumnList" />
+        </trim>
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <include refid="primaryKeyFilter" />
+        </trim>
+    </update>
+
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="get&{simpleclassname}" parameterType="hashmap" resultType="&{classname}">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columnList" />
+        </trim>
+        FROM &{tablename}
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <include refid="primaryKeyFilter" />
+        </trim>
+    </select>
+
+    <!-- 根据条件查询 -->
+    <select id="list&{simpleclassname}" parameterType="hashmap" resultType="&{classname}">
+        select
+        <trim suffixOverrides=",">
+            <include refid="columnList" />
+        </trim>
+        FROM &{tablename}
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <include refid="queryFilter" />
+        </trim>
+    </select>
+    <!-- 计数 -->
+    <select id="count&{simpleclassname}" parameterType="hashmap" resultType="Integer">
+        select count(1)
+        FROM &{tablename}
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <include refid="queryFilter" />
+        </trim>
+    </select>
+</mapper>
