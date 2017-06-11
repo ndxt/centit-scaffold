@@ -19,17 +19,14 @@ managerInterface 是否有manager接口
  if-not:contdition 相当于 if:!(contdition)
  for-each:items 现在的items只能是 keyproperty:property 
 &{end-if}
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import com.centit.core.dao.CodeBook;
-import com.centit.core.dao.BaseDaoImpl;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.centit.framework.core.dao.CodeBook;
+import com.centit.framework.core.dao.PageDesc;
 import &{classname};
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-&{if:daoInterface}import &{basepackage}.dao.&{simpleclassname}Dao;&{end-if}
 
 /**
  * &{simpleclassname}Dao  Repository.
@@ -39,22 +36,40 @@ import org.springframework.transaction.annotation.Transactional;
 */
 
 @Repository
-public class &{simpleclassname}Dao&{if:daoInterface}Impl&{end-if} extends BaseDaoImpl<&{simpleclassname},&{idtype}>
-	&{if:daoInterface}implements &{simpleclassname}Dao&{end-if}{
+public interface &{simpleclassname}Dao {
 
 	public static final Log log = LogFactory.getLog(&{simpleclassname}Dao.class);
-	
-	@Override
-	public Map<String, String> getFilterField() {
-		if( filterField == null){
-			filterField = new HashMap<String, String>();
-&{for-each:keyproperty}
-			filterField.put("&{keyproperty}" , CodeBook.EQUAL_HQL_ID);
-&{end-for-each}
-&{for-each:property}
-			filterField.put("&{property}" , CodeBook.EQUAL_HQL_ID);
-&{end-for-each}
-		}
-		return filterField;
-	} 
+
+	/**
+	 * @param obj
+	 */
+	void saveNew&{simpleclassname}(&{simpleclassname} obj);
+
+	/**
+	 * @param map
+	 */
+	void delete&{simpleclassname}ById(Map<String,String> map);
+	/**
+	 * @param obj
+	 */
+	void update&{simpleclassname}(MedplanYearPrep obj);
+
+	/**
+	 * @param key
+	 * @return
+	 */
+	&{simpleclassname} get&{simpleclassname}(Map<String,String> key);
+	/**
+	 * @param filterDescMap
+	 * @return
+	 */
+	int  count&{simpleclassname}(Map<String, Object> filterDescMap);
+
+	/**
+	 * @param pageQureyMap
+	 * @return
+	 */
+	List<&{simpleclassname}>  list&{simpleclassname}(Map<String, Object> pageQureyMap, PageDesc pageDesc);
+
+
 }

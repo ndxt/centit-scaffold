@@ -73,7 +73,7 @@
     </sql>
 
     <!-- 新增对象-->
-    <insert id="insertNew&{simpleclassname}" parameterType="&{classname}">
+    <insert id="saveNew&{simpleclassname}" parameterType="&{classname}">
         INSERT INTO &{tablename}
         <trim prefix=" (" suffix=") " suffixOverrides=", ">
             <include refid="insertColumn" />
@@ -85,7 +85,7 @@
     </insert>
 
     <!-- 根据主键删除-->
-    <delete id="delete&{simpleclassname}ById" parameterType="hashmap">
+    <delete id="delete&{simpleclassname}ById" parameterType="map">
         DELETE FROM &{tablename}
         <trim prefix="WHERE" prefixOverrides="AND">
             <include refid="primaryKeyFilter" />
@@ -104,7 +104,7 @@
 
 
     <!-- 根据主键获取对象信息 -->
-    <select id="get&{simpleclassname}" parameterType="hashmap" resultType="&{classname}">
+    <select id="get&{simpleclassname}" parameterType="map" resultType="&{classname}">
         select
         <trim suffixOverrides=",">
             <include refid="columnList" />
@@ -116,7 +116,7 @@
     </select>
 
     <!-- 根据条件查询 -->
-    <select id="list&{simpleclassname}" parameterType="hashmap" resultType="&{classname}">
+    <select id="list&{simpleclassname}" parameterType="map" resultType="&{classname}">
         select
         <trim suffixOverrides=",">
             <include refid="columnList" />
@@ -127,7 +127,7 @@
         </trim>
     </select>
     <!-- 计数 -->
-    <select id="count&{simpleclassname}" parameterType="hashmap" resultType="Integer">
+    <select id="count&{simpleclassname}" parameterType="map" resultType="Integer">
         select count(1)
         FROM &{tablename}
         <trim prefix="WHERE" prefixOverrides="AND">

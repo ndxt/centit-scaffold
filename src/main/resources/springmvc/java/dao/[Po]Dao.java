@@ -21,8 +21,9 @@ managerInterface 是否有manager接口
 &{end-if}
 import java.util.HashMap;
 import java.util.Map;
-import com.centit.core.dao.CodeBook;
-import com.centit.core.dao.BaseDaoImpl;
+import com.centit.framework.core.dao.CodeBook;
+import com.centit.framework.core.dao.PageDesc;
+import com.centit.framework.hibernate.dao.BaseDaoImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import &{classname};
