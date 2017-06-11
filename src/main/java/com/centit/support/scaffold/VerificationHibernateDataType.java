@@ -112,7 +112,6 @@ public class VerificationHibernateDataType {
         return names;
     }
 
-    @SuppressWarnings("unchecked")
     private Hbm parseXml(String name) throws DocumentException, SAXException {
         SAXReader reader = new SAXReader();
         // 去除dtd验证

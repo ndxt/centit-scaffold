@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import com.centit.support.algorithm.StringRegularOpt;
@@ -185,7 +186,6 @@ public class TaskDesc {
         dataSource = new DataSourceDescription();
     }
 
-    @SuppressWarnings("unchecked")
     public int loadTaskFromConfig(String configFile) {
         SAXReader builder = new SAXReader(false);
         builder.setValidation(false);
@@ -254,12 +254,12 @@ public class TaskDesc {
                         dataSource.setPassword(property.attributeValue("value"));
                 }
             }// dbconfig
-            List<Element> taskList = (List<Element>) root.selectNodes("//tasklist/task[@run=\"yes\"]");
-            for (Element task : taskList) {
-                String taskName = task.attributeValue("name");
+            List<Node> taskList =  root.selectNodes("//tasklist/task[@run=\"yes\"]");
+            for (Node task : taskList) {
+                String taskName = ((Element)task).attributeValue("name");
                 if ("runHibernateReverse".equals(taskName)) {
-                    runHibernateReverse = true;
-                    property = (Element) task.selectSingleNode("property[@name=\"tables\"]");
+                    runHibernateReverse = true;                    
+                    property = (Element) ((Element)task).selectSingleNode("property[@name=\"tables\"]");
                     if (property != null)
                         tableNames = property.attributeValue("value");
                     nTaskSum++;

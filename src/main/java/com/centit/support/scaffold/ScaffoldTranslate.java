@@ -1,6 +1,6 @@
 package com.centit.support.scaffold;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.centit.support.compiler.VariableTranslate;
 import com.centit.support.database.metadata.HibernateMapInfo;
