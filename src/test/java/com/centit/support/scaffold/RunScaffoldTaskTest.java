@@ -9,7 +9,9 @@ public class RunScaffoldTaskTest {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws SQLException {
-		RunScaffoldTask.runTask("D:\\Projects\\j2eews\\centit-scaffold\\src\\main\\resources\\scaffoldtask.xml");
+		//D:\Projects\framework\centit-scaffold\src\main\resources\scaffoldtask2.xml
+		RunScaffoldTask2.runTask("D:\\Projects\\framework\\centit-scaffold\\src\\main\\resources\\scaffoldtask2.xml");
+		System.out.println("Done!");
 	}
 
 }
