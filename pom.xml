@@ -5,9 +5,18 @@
 	<artifactId>centit-scaffold</artifactId>
 	<version>2.1.1-SNAPSHOT</version>
 	<name>centit-scaffold</name>
-	<description>代码脚手架，spring struts dao 配置文件脚手架</description>
+	<description>代码脚手架，通过配置模板，根据pdm中的表结构生成相关的增删改查操作和页面。</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+
+		<centit.commons.version>2.2.1</centit.commons.version>
+
+		<ojdbc6.version>11.2.0.4</ojdbc6.version>
+		<junit.version>4.12</junit.version>
+		<mysql.version>5.1.9</mysql.version>
+		<db2jcc.version>1.0</db2jcc.version>
+		<sqljdbc4.version>1.0</sqljdbc4.version>
 	</properties>
 
 	<!-- mvn deploy -DpomFile=pom.xml -->
@@ -29,32 +38,33 @@
 			<groupId>com.ibm.db2</groupId>
 			<artifactId>db2jcc</artifactId>
 			<scope>runtime</scope>
-			<version>1.0</version>
+			<version>${db2jcc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
 			<scope>runtime</scope>
-			<version>1.0</version>
+			<version>${sqljdbc4.version}</version>
 		</dependency>
 		
 		<dependency>
 		  <groupId>com.oracle</groupId>
 		  <artifactId>ojdbc6</artifactId>
-		  <version>11.2.0.4</version>
+		  <version>${ojdbc6.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.centit.support</groupId>
 			<artifactId>centit-database</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${centit.commons.version}</version>
 		</dependency>
 
 
