@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 
-		<centit.commons.version>2.2.1</centit.commons.version>
+		<centit.commons.version>2.2.3-SNAPSHOT</centit.commons.version>
 
 		<ojdbc6.version>11.2.0.4</ojdbc6.version>
 		<junit.version>4.12</junit.version>
@@ -66,7 +66,19 @@
 			<artifactId>centit-database</artifactId>
 			<version>${centit.commons.version}</version>
 		</dependency>
-
-
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

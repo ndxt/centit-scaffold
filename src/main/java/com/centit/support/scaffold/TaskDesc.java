@@ -3,6 +3,7 @@ package com.centit.support.scaffold;
 import java.io.File;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
@@ -12,7 +13,7 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import com.centit.support.algorithm.StringRegularOpt;
-import com.centit.support.database.DataSourceDescription;
+import com.centit.support.database.utils.DataSourceDescription;
 import com.centit.support.xml.IgnoreDTDEntityResolver;
 
 public class TaskDesc {
@@ -227,7 +228,7 @@ public class TaskDesc {
                     property = (Element) dbconfig.selectSingleNode("property[@name=\"configfile\"]");
                     if (property != null) {
                         String sConfFile = property.attributeValue("value");
-                        if (sConfFile != null && !sConfFile.isEmpty()) {
+                        if (StringUtils.isNotBlank(sConfFile)) {
                             if (sConfFile.indexOf(':') < 0)
                                 sConfFile = projDir + '/' + sConfFile;
                             String sDbBeanName = "dataSource";

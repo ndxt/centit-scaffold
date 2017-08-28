@@ -1,12 +1,11 @@
 package com.centit.support.scaffold;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
-import com.centit.support.database.DBConnect;
 import com.centit.support.database.metadata.SimpleTableField;
 import com.centit.support.database.metadata.SimpleTableInfo;
 import com.centit.support.database.metadata.SimpleTableReference;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class MetadataPersistent {
 	/**
@@ -14,15 +13,15 @@ public class MetadataPersistent {
 	 * @param tabName
 	 * @return
 	 */
-	private DBConnect dbc;
+	private Connection conn;
 	public SimpleTableInfo loadTableMetadata(String tabName)
 	{
 		//TODO load table metadata
 		return null;
 	}
 	
-	public void setDBConfig(DBConnect dbc){
-		this.dbc=dbc;
+	public void setDBConfig(Connection dbc){
+		this.conn =dbc;
 	}
 	/**
 	 * 这个函数将覆盖系统中已经有的元数据记录，实际上他是先删除已有额元数据然后插入新的数据
@@ -33,7 +32,6 @@ public class MetadataPersistent {
 		String sTabCode = md.getTableName().toUpperCase();
 		PreparedStatement pStmt= null;
 		try {
-			Connection conn = dbc.getConn();
 			//删除现有数据库中的元数据
 			pStmt= conn.prepareStatement("delete from F_MD_TABLE where TBCODE=?");
 			pStmt.setString(1, sTabCode);

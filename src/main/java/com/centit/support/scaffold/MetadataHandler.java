@@ -1,10 +1,10 @@
 package com.centit.support.scaffold;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.centit.support.database.DataSourceDescription;
-import com.centit.support.database.DbcpConnect;
-import com.centit.support.database.DbcpConnectPools;
+import com.centit.support.database.utils.DataSourceDescription;
+import com.centit.support.database.utils.DbcpConnectPools;
 import com.centit.support.database.metadata.PdmReader;
 import com.centit.support.database.metadata.SimpleTableInfo;
 
@@ -18,10 +18,8 @@ public class MetadataHandler {
 
 		String sTableNames = task.getMetaTables();
 		String [] sTables=null;
-		
-	
-		
-		DbcpConnect dbc= DbcpConnectPools.getDbcpConnect(
+
+		Connection dbc= DbcpConnectPools.getDbcpConnect(
 				task.getDataSourceDesc());
 		
 		MetadataPersistent db = new MetadataPersistent();
@@ -75,7 +73,7 @@ public class MetadataHandler {
 		DataSourceDescription dataSource=new DataSourceDescription();
 		dataSource.loadHibernateConfig(sHibernateConfigFile,sDbBeanName);
 		
-		DbcpConnect dbc= DbcpConnectPools.getDbcpConnect(dataSource);
+		Connection dbc= DbcpConnectPools.getDbcpConnect(dataSource);
 		
 		MetadataPersistent db = new MetadataPersistent();
 		db.setDBConfig(dbc);
