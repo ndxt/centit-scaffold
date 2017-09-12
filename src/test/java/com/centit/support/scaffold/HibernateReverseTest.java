@@ -1,13 +1,13 @@
 package com.centit.support.scaffold;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.centit.support.database.DataSourceDescription;
-import com.centit.support.database.DbcpConnect;
-import com.centit.support.database.DbcpConnectPools;
+import com.centit.support.database.utils.DataSourceDescription;
+import com.centit.support.database.utils.DbcpConnectPools;
 import com.centit.support.database.metadata.DatabaseMetadata;
-import com.centit.support.database.metadata.IbmDb2Metadata;
-import com.centit.support.database.metadata.MsSqlSvrMetadata;
+import com.centit.support.database.metadata.DB2Metadata;
+import com.centit.support.database.metadata.SqlSvrMetadata;
 import com.centit.support.database.metadata.OracleMetadata;
 import com.centit.support.database.metadata.SimpleTableInfo;
 
@@ -26,16 +26,16 @@ public class HibernateReverseTest {
 
 		DataSourceDescription dataSource=new DataSourceDescription();
 		dataSource.loadHibernateConfig(sHibernateConfigFile,sDbBeanName);
-		
-		DbcpConnect dbc= DbcpConnectPools.getDbcpConnect(dataSource);
+
+		Connection dbc= DbcpConnectPools.getDbcpConnect(dataSource);
 		
 		DatabaseMetadata db = null;
 		if( dataSource.getConnUrl().indexOf("oracle")>=0)
 			db = new OracleMetadata();
 		else if( dataSource.getConnUrl().indexOf("db2")>=0)
-			db = new IbmDb2Metadata();
+			db = new DB2Metadata();
 		else if( dataSource.getConnUrl().indexOf("sqlserver")>=0)
-			db = new MsSqlSvrMetadata();
+			db = new SqlSvrMetadata();
 		else {
 			System.out.println("无法辨认数据库类型！");
 			return ;
