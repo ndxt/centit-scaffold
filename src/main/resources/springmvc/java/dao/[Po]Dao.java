@@ -22,10 +22,10 @@ managerInterface 是否有manager接口
 import java.util.HashMap;
 import java.util.Map;
 import com.centit.framework.core.dao.CodeBook;
-import com.centit.framework.core.dao.PageDesc;
-import com.centit.framework.hibernate.dao.BaseDaoImpl;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.centit.support.database.utils.PageDesc;
+import com.centit.framework.jdbc.dao.BaseDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import &{classname};
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class &{simpleclassname}Dao&{if:daoInterface}Impl&{end-if} extends BaseDaoImpl<&{simpleclassname},&{idtype}>
 	&{if:daoInterface}implements &{simpleclassname}Dao&{end-if}{
 
-	public static final Log log = LogFactory.getLog(&{simpleclassname}Dao.class);
+	private static final Logger logger = LoggerFactory.getLogger(&{simpleclassname}Dao.class);
 	
 	@Override
 	public Map<String, String> getFilterField() {

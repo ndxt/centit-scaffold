@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project []>
 <project name="deploy" default="zip">
-	   <property name="project.dir" value="D:/Projects/framework/centit-scaffold" />	
+	   <property name="project.dir" value="D:/centit-scaffold" />
 	   <property name="project.name" value="centit-scaffold" />	
 	   <property name="project.version" value="2.1.1" />	
 	   <property name="sys.dir" value="src" />
@@ -19,10 +19,11 @@
 	    	<jar destfile="${deploy.dir}/page.jar" basedir="${page.dir}" />
 	    </target>
 	
-    <!-- 运行 打包-->
+    	<!-- 运行 打包-->
+
 	    <target name="zipWar">
 	    	<jar destfile="${deploy.dir}/cas.war" basedir="cas" />
-	    </target>	
+	    </target>
 	
 		<property name="bin.dir" value="${project.dir}/target/classes" />
 		<property name="scaffold.jar" value="${project.dir}/target/${project.name}-${project.version}.jar" />
@@ -32,110 +33,110 @@
 			<pathelement path="${bin.dir}"/>
 		</path>
 	
-		<target name="runCreateSourceHandler">
+		<!--<target name="runCreateSourceHandler">
 			<java classname="com.centit.support.scaffold.Handler" fork= "true" > 
 				<sysproperty key="file.encoding" value="UTF-8" />  
-				<!-- java代码所在的绝对路径 -->
+				&lt;!&ndash; java代码所在的绝对路径 &ndash;&gt;
 			    <arg  value = "${project.dir}/src/test/java" />
-				<!-- jsp代码所在的绝对路径 -->
+				&lt;!&ndash; jsp代码所在的绝对路径 &ndash;&gt;
 			    <arg  value = "${project.dir}/src/main/webapp/page/sys" />
-				<!-- config文件所在的绝对路径-->
+				&lt;!&ndash; config文件所在的绝对路径&ndash;&gt;
 				<arg  value = "${project.dir}/src/main/resources/sysconfig" />
-				<!-- 业务名 -->
+				&lt;!&ndash; 业务名 &ndash;&gt;
 				<arg  value = "sys" />
-				<!-- 业务类包的根包 -->
+				&lt;!&ndash; 业务类包的根包 &ndash;&gt;
 				<arg  value = "com/centit/sys"/> 
-				<!-- 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt -->
-				<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
+				&lt;!&ndash; 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt &ndash;&gt;
+				&lt;!&ndash; 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 &ndash;&gt;
 				<arg  value = "1,1,0,1,1,1,1,1,1,0" />	
-				<!-- 要转换的 hbm.xml 的文件名，或者为 all 则生成 业务类包的根包.po下面的所有的 *.hbm.xml-->
+				&lt;!&ndash; 要转换的 hbm.xml 的文件名，或者为 all 则生成 业务类包的根包.po下面的所有的 *.hbm.xml&ndash;&gt;
 				<arg  value = "UserSetting.hbm.xml" /> 
-				<!-- java template dir 如果不是绝对路径程序会在当前的jar包中寻找数据 -->
+				&lt;!&ndash; java template dir 如果不是绝对路径程序会在当前的jar包中寻找数据 &ndash;&gt;
 				<arg  value = "struts2template" /> 
-				<!-- jsp template dir 同上-->
+				&lt;!&ndash; jsp template dir 同上&ndash;&gt;
 				<arg  value = "struts2template/jsp" /> 
 				
 				<classpath refid="cp"></classpath>
 			</java>
-		</target>	
-		<target name="runHibernateReverse">
+		</target>	-->
+		<!--<target name="runHibernateReverse">
 			<java classname="com.centit.support.scaffold.HibernateReverse" fork= "true" > 
 				<sysproperty key="file.encoding" value="UTF-8" />  
-				<!-- java代码所在的绝对路径 -->
+				&lt;!&ndash; java代码所在的绝对路径 &ndash;&gt;
 			    <arg  value = "${project.dir}/src/main/java" />
-				<!-- 业务类包的根包 hibernate配置文件 生成的地方-->
+				&lt;!&ndash; 业务类包的根包 hibernate配置文件 生成的地方&ndash;&gt;
 				<arg  value = "com/centit/swnb"/> 
-				<!-- 表名 Career,education,employee-->
+				&lt;!&ndash; 表名 Career,education,employee&ndash;&gt;
 				<arg  value = "WR_ADDV_B,WR_WMBSINF_B,WR_WMCTCP_B,WR_WMCTFC_D,WR_WMCTIV_S,WR_WMCTST_D,WR_WMCTWD_D,WR_WMCTWP_C,WR_WMCTWS_S,WR_WMCTWSS_S,WR_WMCTWSSL_W,WR_WMFN_B,WR_WMLAW_B,WR_WMOTNTWS_C,WR_WMSCEC_B"/> 
-				<!-- Hibernate 配置文件 用于获取其数据库配置 ，可以是相对路径 也可以是绝对路径-->
+				&lt;!&ndash; Hibernate 配置文件 用于获取其数据库配置 ，可以是相对路径 也可以是绝对路径&ndash;&gt;
 				<arg  value = "${project.dir}/src/main/webapp/WEB-INF/hibernate.cfg.xml"/> 
-				<!-- Hibernate 配置文件数据库配置的bean名称 默认为 dataSource-->
+				&lt;!&ndash; Hibernate 配置文件数据库配置的bean名称 默认为 dataSource&ndash;&gt;
 				<arg  value = "dataSource"/> 
 				<classpath refid="cp"></classpath>
 			</java>
-		</target>
+		</target>-->
 	
-		<target name="runPdmHibernateReverse">
+		<!--<target name="runPdmHibernateReverse">
 			<java classname="com.centit.support.scaffold.PDMHibernateReverse" fork= "true" > 
 				<sysproperty key="file.encoding" value="UTF-8" />  
-				<!-- java代码所在的绝对路径 -->
+				&lt;!&ndash; java代码所在的绝对路径 &ndash;&gt;
 			    <arg  value = "${project.dir}/src/test/java" />
-				<!-- config文件所在的绝对路径 -->
+				&lt;!&ndash; config文件所在的绝对路径 &ndash;&gt;
 				<arg  value = "${project.dir}/src/main/resources/sysconfig" />
-				<!-- 业务名 -->
+				&lt;!&ndash; 业务名 &ndash;&gt;
 				<arg  value = "sys" />
-				<!-- 业务类包的根包 hibernate配置文件 生成的地方-->
+				&lt;!&ndash; 业务类包的根包 hibernate配置文件 生成的地方&ndash;&gt;
 				<arg  value = "com/centit/sys"/> 
-				<!-- 表名 用[,]分开，比如：Career,Education,Employee 
+				&lt;!&ndash; 表名 用[,]分开，比如：Career,Education,Employee
 					注意pdm中的表面大小写是敏感的
-				-->
+				&ndash;&gt;
 				<arg  value = "F_OPT_RUN_REC"/> 
-				<!-- pdm 文件路径 ，可以是相对路径 也可以是绝对路径-->
+				&lt;!&ndash; pdm 文件路径 ，可以是相对路径 也可以是绝对路径&ndash;&gt;
 				<arg  value = "D:/Centit/J2EE/bsdfw2/Document/设计文档/BS开发框架.pdm"/> 
-				<!-- 数据库表模式 schema 这个必须有-->
+				&lt;!&ndash; 数据库表模式 schema 这个必须有&ndash;&gt;
 				<arg  value = "BSDFW2"/> 
-				<!-- 是否要生成   [app]Resource_zh_CN.properties 默认值为1 即生成
+				&lt;!&ndash; 是否要生成   [app]Resource_zh_CN.properties 默认值为1 即生成
 				0: 只生成 hibernate映射文件
 				1：生成hibernate映射文件 和 Resour propertie 文件
 				2：只生成 Resour propertie 文件
-				-->
+				&ndash;&gt;
 				<arg  value = "1"/> 
 				<classpath refid="cp"></classpath>
 			</java>
-		</target>	
-		<target name="runMetadataHandler">
+		</target>	-->
+		<!--<target name="runMetadataHandler">
 			<java classname="com.centit.support.scaffold.MetadataHandler" fork= "true" > 
 				<sysproperty key="file.encoding" value="UTF-8" />  
-				<!-- pdm 文件路径 ，可以是相对路径 也可以是绝对路径-->
+				&lt;!&ndash; pdm 文件路径 ，可以是相对路径 也可以是绝对路径&ndash;&gt;
 				<arg  value = "D:/Centit/J2EE/bsdfw2/Document/设计文档/BS开发框架.pdm"/> 
-				<!-- 表名 用[,]分开，比如：Career,Education,Employee 
+				&lt;!&ndash; 表名 用[,]分开，比如：Career,Education,Employee
 					注意pdm中的表面大小写是敏感的
 					ALL 代表全部
-				-->
+				&ndash;&gt;
 				<arg  value = "All"/> 
-				<!-- Hibernate 配置文件 用于获取其数据库配置 ，可以是相对路径 也可以是绝对路径-->
+				&lt;!&ndash; Hibernate 配置文件 用于获取其数据库配置 ，可以是相对路径 也可以是绝对路径&ndash;&gt;
 				<arg  value = "${project.dir}/src/main/webapp/WEB-INF/hibernate.cfg.xml"/> 
-				<!-- Hibernate 配置文件数据库配置的bean名称 默认为 dataSource-->
+				&lt;!&ndash; Hibernate 配置文件数据库配置的bean名称 默认为 dataSource&ndash;&gt;
 				<arg  value = "dataSource"/> 
 				<classpath refid="cp"></classpath>
 			</java>
-		</target>	
+		</target>-->
 	
-	<target name="runScaffoldTask">
+	<!--<target name="runScaffoldTask">
 		<java classname="com.centit.support.scaffold.RunScaffoldTask" fork= "true" > 
 			<sysproperty key="file.encoding" value="UTF-8" />  
-			<!-- 任务文件路径 -->
+			&lt;!&ndash; 任务文件路径 &ndash;&gt;
 			<arg  value = "D:/Projects/j2eews/centit-scaffold/src/main/resources/scaffoldtask.xml"/> 
 			<classpath refid="cp"></classpath>
 			
 		</java>
-	</target>	
+	</target>-->
 	
 	<target name="runScaffoldTask2">
 		<java classname="com.centit.support.scaffold.RunScaffoldTask2" fork= "true" > 
 			<sysproperty key="file.encoding" value="UTF-8" />  
 			<!-- 任务文件路径 -->
-			<arg  value = "D:/Projects/framework2.1/centit-scaffold/src/main/resources/scaffoldtask2.xml"/> 
+			<arg  value = "D:/centit-scaffold/src/main/resources/scaffoldtask2.xml"/>
 			<classpath refid="cp"></classpath>
 			
 		</java>

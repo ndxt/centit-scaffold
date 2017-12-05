@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 
-		<centit.commons.version>2.2.3-SNAPSHOT</centit.commons.version>
+		<centit.commons.version>2.2.5-SNAPSHOT</centit.commons.version>
 
 		<ojdbc6.version>11.2.0.4</ojdbc6.version>
 		<junit.version>4.12</junit.version>

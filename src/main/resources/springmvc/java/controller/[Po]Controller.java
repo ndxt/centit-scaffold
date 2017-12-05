@@ -1,11 +1,8 @@
 package &{basepackage}.controller;
 
 import &{classname};
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.lang.ArrayUtils;
-import java.io.Serializable;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSONArray;
-import com.centit.core.controller.BaseController;
-import com.centit.core.controller.ResponseData;
-import com.centit.core.common.JsonResultUtils;
-import com.centit.core.common.PageDesc;
+import com.centit.framework.common.JsonResultUtils;
+import com.centit.framework.common.ResponseMapData;
+import com.centit.framework.core.controller.BaseController;
+import com.centit.support.database.utils.PageDesc;
 /**
  * &{simpleclassname}  Controller.
  * create by scaffold &{today()} 
@@ -37,8 +34,8 @@ import com.centit.core.common.PageDesc;
 @Controller
 @RequestMapping("/&{appname+'/'+lowcase(simpleclassname)}")
 public class &{simpleclassname}Controller  extends BaseController {
-	private static final Log log = LogFactory.getLog(&{simpleclassname}Controller.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(&{simpleclassname}Controller.class);
+
 	@Resource
 	private &{simpleclassname}Manager &{entityname}Mag;	
 	/*public void set&{simpleclassname}Mag(&{simpleclassname}Manager basemgr)
@@ -49,24 +46,23 @@ public class &{simpleclassname}Controller  extends BaseController {
 
     /**
      * 查询所有   &{tabledesc}  列表
-     *
-     * @param field    json中只保存需要的属性名
      * @param request  {@link HttpServletRequest}
      * @param response {@link HttpServletResponse}
      * @return {data:[]}
      */
     @RequestMapping(method = RequestMethod.GET)
-    public void list(String[] field, PageDesc pageDesc, HttpServletRequest request, HttpServletResponse response) {
+    public void list(PageDesc pageDesc, HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> searchColumn = convertSearchColumn(request);        
         
-        JSONArray listObjects = &{entityname}Mag.list&{simpleclassname}sAsJson(field,searchColumn, pageDesc);
+        JSONArray listObjects = &{entityname}Mag.list&{simpleclassname}sAsJson(
+			super.getLoginUser(request),searchColumn, pageDesc);
 
         if (null == pageDesc) {
             JsonResultUtils.writeSingleDataJson(listObjects, response);
             return;
         }
-        
-        ResponseData resData = new ResponseData();
+
+		ResponseMapData resData = new ResponseMapData();
         resData.addResponseData(OBJLIST, listObjects);
         resData.addResponseData(PAGE_DESC, pageDesc);
 
@@ -77,8 +73,6 @@ public class &{simpleclassname}Controller  extends BaseController {
      * 查询单个  &{tabledesc} 
 	&{for-each:keyproperty}
 	 * @param &{keyproperty}  &{keypropertyColumn}&{end-for-each}
-     * @param catalogCode 主键
-     * 
      * @param response    {@link HttpServletResponse}
      * @return {data:{}}
      */
@@ -102,8 +96,8 @@ public class &{simpleclassname}Controller  extends BaseController {
      */
     @RequestMapping(method = {RequestMethod.POST})
     public void create&{simpleclassname}(@Valid &{simpleclassname} &{entityname}, HttpServletResponse response) {
-    	Serializable pk = &{entityname}Mag.saveNewObject(&{entityname});
-        JsonResultUtils.writeSingleDataJson(pk,response);
+    	&{entityname}Mag.saveNewObject(&{entityname});
+        JsonResultUtils.writeSingleDataJson(&{entityname}.get&{U_idname}(),response);
     }
 
     /**

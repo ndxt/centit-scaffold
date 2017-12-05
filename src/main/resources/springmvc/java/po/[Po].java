@@ -2,30 +2,16 @@ package &{basepackage}.po;
 
 import java.util.Date;
 import java.sql.Timestamp;
-import javax.persistence.Column;
-&{if:hasID}
-import javax.persistence.EmbeddedId;
-&{end-if}
-&{if:!hasID}
-import javax.persistence.Id;
-&{end-if}
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 &{if:hasOnetomany}
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 &{end-if}
 /**
  * create by scaffold &{today()} 
@@ -47,15 +33,14 @@ public class &{simpleclassname} implements java.io.Serializable {
 	 */
 	@Id
 	@Column(name = "&{keypropertyColumn}")
-	@GeneratedValue(generator = "assignedGenerator")
-	@GenericGenerator(name = "assignedGenerator", strategy = "assigned")
 	private &{keypropertytype} &{keyproperty};&{end-for-each}&{end-if}
 &{for-each:property}
 	/**
 	 * &{propertydesc} &{propertyComment} 
 	 */
-	@Column(name = "&{propertyColumn}")&{if:propertynotnull}
-	@NotBlank(message = "字段不能为空")&{end-if}&{if:propertytype="String"}
+	@Column(name = "&{propertyColumn}")&{if:propertynotnull}&{if:propertytype="String"}
+  	@NotBlank(message = "字段不能为空")&{end-if}&{if:propertytype="Date"}
+    @NotNull(message = "字段不能为空")&{end-if}&{end-if}&{if:propertytype="String"}
 	@Length(min = 0, max = &{propertylength}, message = "字段长度不能小于{min}大于{max}")&{end-if}
 	private &{propertytype}  &{property};&{end-for-each}
 &{for-each:onetomany}	
@@ -129,19 +114,19 @@ public class &{simpleclassname} implements java.io.Serializable {
 	}
 &{end-for-each}
 &{for-each:onetomany}
-	public Set<&{subclassname}> get&{U_subentitylistname}(){
+	public List<&{subclassname}> get&{U_subentitylistname}(){
 		if(this.&{subentitylistname}==null)
-			this.&{subentitylistname} = new HashSet<&{subclassname}>();
+			this.&{subentitylistname} = new ArrayList<&{subclassname}>();
 		return this.&{subentitylistname};
 	}
 
-	public void set&{U_subentitylistname}(Set<&{subclassname}> &{subentitylistname}) {
+	public void set&{U_subentitylistname}(List<&{subclassname}> &{subentitylistname}) {
 		this.&{subentitylistname} = &{subentitylistname};
 	}	
 
 	public void add&{subclassname}(&{subclassname} &{L_subentityname} ){
 		if (this.&{subentitylistname}==null)
-			this.&{subentitylistname} = new HashSet<&{subclassname}>();
+			this.&{subentitylistname} = new ArrayList<&{subclassname}>();
 		this.&{subentitylistname}.add(&{L_subentityname});
 	}
 	
@@ -173,7 +158,7 @@ public class &{simpleclassname} implements java.io.Serializable {
 		}
 		//delete
 		boolean found = false;
-		Set<&{subclassname}> oldObjs = new HashSet<&{subclassname}>();
+		List<&{subclassname}> oldObjs = new ArrayList<&{subclassname}>();
 		oldObjs.addAll(get&{U_subentitylistname}());
 		
 		for(Iterator<&{subclassname}> it=oldObjs.iterator(); it.hasNext();){
@@ -235,7 +220,7 @@ public class &{simpleclassname} implements java.io.Serializable {
 &{for-each:property}  
 		this.&{property}= null;&{end-for-each}
 &{for-each:onetomany}	
-		this.&{subentitylistname} = new HashSet<&{subclassname}>();&{end-for-each}
+		this.&{subentitylistname} = new ArrayList<&{subclassname}>();&{end-for-each}
 		return this;
 	}
 }

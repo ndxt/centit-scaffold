@@ -1,0 +1,89 @@
+<div class="easyui-layout" fit="true">
+	<div region="north" class="search-body" border="false" cls="search">
+		<form class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+				<div class="col-sm-4 search-item">
+					<label>操作用户</label>
+					<input type="text" class="easyui-combobox" name="s_userCode" target="user"/>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-xs-12">
+					<a class="easyui-linkbutton btn-search" iconCls="icon-search">搜索</a>
+					<a class="easyui-linkbutton btn-reset" iconCls="icon-reload">重置</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div region="center" border="false">
+		<table fit="true"
+			   url="service/&{appname}/&{lowcase(simpleclassname)}"
+			   idField="&{keyproperty}"
+			   search=".search"
+			   rownumbers="false"
+			   singleSelect="false"
+			   toolbar=".temp-toolbar">
+			<thead>
+			<tr>
+				<th data-options="field:'checkbox'" checkbox="true"></th>
+				&{for-each:keyproperty}<th data-options="field:'&{keyproperty}'">&{keypropertydesc}</th> &{end-for-each}
+				&{for-each:property}<th data-options="field:'&{property}'">&{propertydesc}</th>
+				&{end-for-each}
+				<th field="_operator" width="100"></th>
+			</tr>
+			</thead>
+		</table>
+
+		<div class="temp-toolbar">
+			<a iconCls="icon-add" href="modules/&{appname}/&{lowcase(simpleclassname)}/&{lowcase(simpleclassname)}-info.html" trigger="none"
+			   target="dialog" rel="&{lowcase(simpleclassname)}_add" title="新增&{tabledesc}" width="640" height="480" btnValue="添加">新增</a>
+			<hr>
+
+			<a iconCls="icon-edit" href="modules/&{appname}/&{lowcase(simpleclassname)}/&{lowcase(simpleclassname)}-info.html" trigger="single"
+			   target="dialog" rel="&{lowcase(simpleclassname)}_edit" title="编辑 {{text}}" width="640" height="480" btnValue="更新" for="column">编辑</a>
+			<hr>
+
+			<a iconCls="icon-edit" href="modules/&{appname}/&{lowcase(simpleclassname)}/&{lowcase(simpleclassname)}-view.html" trigger="single"
+			   target="dialog" rel="&{lowcase(simpleclassname)}_view" title="查看 {{text}}" width="640" height="480" btnValue="查看" for="column">查看</a>
+			<hr>
+
+			<a iconCls="icon-base icon-base-ban" trigger="single"
+			   target="confirm" rel="&{lowcase(simpleclassname)}_remove" title="是否确定删除 {{text}}？" for="column">删除</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	$.parser.onComplete = function(panel) {
+		$.parser.onComplete = $.noop;
+		
+		requirejs([
+		           'modules/&{appname}/&{lowcase(simpleclassname)}/ctrl/&{lowcase(simpleclassname)}'
+		          ], function(&{simpleclassname}) {
+			window.&{simpleclassname} = new &{simpleclassname}('&{lowcase(simpleclassname)}', panel);
+			window.&{simpleclassname}.load(panel);
+		});
+	};
+
+</script>

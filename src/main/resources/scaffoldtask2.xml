@@ -17,25 +17,25 @@
 
 <scaffold>
 	<project>
-		<property name="projdir" value="D:/Projects/currwork/centit-im" />
-		<property value="im" name="appname" />
+		<property name="projdir" value="E:/caseManager" />
+		<property value="casemanagement" name="appname" />
 		<property value="src/main/java" name="srcdir" />
 		<property value="src/main/webapp" name="jspdir" />
 		<property value="src/main/resources/config" name="configdir" />
-		<property value="com/centit/im" name="apppackagepath" />
+		<property value="com/centit/casemanagement" name="apppackagepath" />
 	</project>
 	<tasklist>
 		<task name="runCreateSourceMvcHandler" run="yes">
 			<!-- 是否创建相关的文件：Pojo，Dao,Dao接口,Manager,Manger接口,Action,Jsp,XmlConfig,isInTranaction,inWorkFlowOpt, 
 			isDwz[是否Dwz页面] -->
 			<!-- 如果不设置Manager接口 就不可以用系统的事务，也就是isInTranaction设置无效 -->
-			<property value="1,1,1,1,1,1,0,1,1,0,1" name="instruction" />
-			<property name="pdmfile" value="D:/temp/im.pdm" />
+			<property value="1,1,0,1,1,1,0,1,1,0,1" name="instruction" />
+			<property name="pdmfile" value="E:\caseManager\doc\案管平台2.pdm" />
 			<property name="dbschema" value="" />
-			<property name="tables" value="F_WEB_IM_MESSAGE" />
-			<property value="D:/Projects/framework/centit-scaffold/src/main/resources/springmvc-mybatis/java" name="javatemplate" />
-			<property value="D:/Projects/framework/centit-scaffold/src/main/resources/springmvc-mybatis/page" name="jsptemplate" />
-			<property value="true" name="force" />
+			<property name="tables" value="all" />
+			<property value="D:/centit-scaffold/src/main/resources/springmvc/java" name="javatemplate" />
+			<property value="D:/centit-scaffold/src/main/resources/springmvc/page" name="jsptemplate" />
+			<property value="false" name="force" />
 		</task>
 	</tasklist>
 </scaffold>

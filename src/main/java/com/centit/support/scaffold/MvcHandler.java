@@ -2,6 +2,10 @@ package com.centit.support.scaffold;
 
 import com.centit.support.database.metadata.HibernateMapInfo;
 import com.centit.support.database.metadata.PdmReader;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 
 /** 
@@ -50,13 +54,24 @@ public class MvcHandler {
         String sClassPath = task.getAppPackagePath() + "/po";
 
         String sPackageName = sClassPath.replace('/', '.');
-        
-		String [] sTables = sMvcTables.split(",");
-		for(String sTabName : sTables){
-			System.out.println("正在转换表: "+sTabName);
-			HibernateMapInfo hbmMD = reader.getHibernateMetadata(sTabName.trim(),sPackageName);
-			
-			codehandler.createCodeSuite(hbmMD,task.isForce()); 
+        if(StringUtils.isBlank(sMvcTables) || "all".equalsIgnoreCase(sMvcTables)){
+			List<Pair<String,String>> tables = reader.getAllTableCode();
+			for (Pair<String,String> table : tables) {
+				System.out.println("正在转换表: " + table.getLeft());
+				HibernateMapInfo hbmMD = reader.getHibernateMetadata(
+						table.getLeft().trim(), sPackageName);
+
+				codehandler.createCodeSuite(hbmMD, task.isForce());
+			}
+		}else {
+			String[] sTables = sMvcTables.split(",");
+
+			for (String sTabName : sTables) {
+				System.out.println("正在转换表: " + sTabName);
+				HibernateMapInfo hbmMD = reader.getHibernateMetadata(sTabName.trim(), sPackageName);
+
+				codehandler.createCodeSuite(hbmMD, task.isForce());
+			}
 		}
 		
 		System.out.println("所有工作完成！");
