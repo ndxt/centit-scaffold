@@ -5,8 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.centit.support.algorithm.BooleanBaseOpt;
 import com.centit.support.algorithm.StringBaseOpt;
-import com.centit.support.compiler.Formula;
+import com.centit.support.compiler.VariableFormula;
 import com.centit.support.file.FileSystemOpt;
 
 /**
@@ -81,8 +82,9 @@ public class CodeHandler {
                     if (sWord.equalsIgnoreCase("end-if"))
                         return 0;
                     
-                    Formula f = new Formula();
-                    buf = f.calculate(sWord,m_varTrans);                    
+
+                    buf = StringBaseOpt.castObjectToString(
+                            VariableFormula.calculate(sWord,m_varTrans));
                     //buf = m_varTrans.getVarValue(sWord);
                     try {
                         if (buf != null)
@@ -98,9 +100,8 @@ public class CodeHandler {
     }
 
     private int runIfSentence(ScaffoldLexer varMorp, String conditionWord, BufferedWriter bw) {
-        Formula f = new Formula();
-        String sCond = f.calculate(conditionWord,m_varTrans);
-        if (sCond == null || "".equals(sCond) || "0".equals(sCond) || "false".equalsIgnoreCase(sCond)) {
+        Object sCond = VariableFormula.calculate(conditionWord,m_varTrans);
+        if (BooleanBaseOpt.castObjectToBoolean(sCond,false)) {
             varMorp.skipToControlEnd("if");
         }
         return 0;
